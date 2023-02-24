@@ -9,13 +9,13 @@ public class TarefaAcessaBancoProcedimento implements Runnable {
 
     @Override
     public void run() {
-        synchronized (tx) {
-            System.out.println("Peguei a chave do tx");
-            tx.begin();
+        synchronized (pool) {
+            System.out.println("Peguei a chave do pool");
+            pool.getConnection();
 
-            synchronized (pool) {
-                System.out.println("Peguei a chave da pool");
-                pool.getConnection();
+            synchronized (tx) {
+                System.out.println("Peguei a chave da tx");
+                tx.begin();
             }
         }
     }
